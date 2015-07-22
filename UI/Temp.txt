@@ -1,0 +1,14 @@
+﻿Pick your own Text Adventure Game where content is written by a commuity 
+
+var userStore = new UserStore<IdentityUser>();
+var manager = new UserManager<IdentityUser>(userStore);
+
+Update-Package EntityFramework 6.1.2
+
+
+var userStore = new UserStore<IdentityUser>();
+var manager = new UserManager<IdentityUser>(userStore);
+
+
+var me = manager.FindByName("sam");
+if (me == null) manager.Create(new IdentityUser() { UserName = "sam", Email = "sam.prager@gmail.com" }, "password");
