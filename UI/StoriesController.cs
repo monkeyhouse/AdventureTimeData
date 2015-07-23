@@ -54,7 +54,7 @@ namespace UI
         public IHttpActionResult Put(int id, [FromBody]StoryEditModel value)
         {
             StoryModel story;
-            try { story = repo.UpdateStory(id, value); }
+            try { story = repo.UpdateStory(value); }
             catch (Exception ex) { return InternalServerError(ex); }
             return Ok(story);
         }
@@ -69,18 +69,18 @@ namespace UI
         }
 
 
-        // GET api/stories/5/stats
-        [Route("~/api/stories/{id:int}/stats")]
-        public object GetStat(int id)
-        {
-            return repo.GetStoryStats(id);
-        }
+        //// GET api/stories/5/stats
+        //[Route("~/api/stories/{id:int}/stats")]
+        //public object GetStat(int id)
+        //{
+        //    return repo.GetStoryStats(id);
+        //}
 
-        // GET api/stories/5/tree
-        [Route("~/api/stories/{id:int}/tree/")]
-        public object GetTree(int id)
-        {
-            return repo.GetStoryTree(id);
-        }
+        //// GET api/stories/5/tree
+        //[Route("~/api/stories/{id:int}/tree/")]
+        //public object GetTree(int id)
+        //{
+        //    return repo.GetStoryTree(id);
+        //}
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Business;
+using Business.Models;
 using Business.Repositories;
 using Consoles;
 using Data;
@@ -35,7 +36,7 @@ namespace ATConsole
             db.Database.ExecuteSqlCommand("Delete from StoryGenres where 1=1");
             db.Database.ExecuteSqlCommand("DELETE from Genres where 1=1");
             db.Database.ExecuteSqlCommand("DELETE from Stories where 1=1");
-            db.Database.ExecuteSqlCommand("DELETE from Segments where 1=1");
+            db.Database.ExecuteSqlCommand("DELETE from Pages where 1=1");
             db.SaveChanges();
 
 
@@ -75,18 +76,16 @@ namespace ATConsole
         {
             var genres = Generes.GetRandomValues(4).Select( t=> new GenreModel(){ID = t.Index, Text =  t.Item});
 
-            var firstSegment = new SegmentModel()
+            var firstPage = new PageModel()
                                {
-                                   Leaders = null,
                                    Body = "Once there was an only lady who lived in a shoe. She sneezed loudly and said ..... Then she took the dear old rabbit inside, she boiled the water and ..... the hide.",
-                                   Actions = null,
                                    IsEnding = true
                                };
             var story = new StoryEditModel()
                         {
                             Title = "My Test Story",
-                            Byline = "Once there was a rabbit",
-                            FirstSegment = firstSegment,
+                            Summary = "Once there was a rabbit",
+                            FirstPage = firstPage,
                             Generes = genres
                         };
 

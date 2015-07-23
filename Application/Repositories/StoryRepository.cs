@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Data;
+using Business.Models;
 using Data.Models;
-using Microsoft.Practices.Unity;
 
 namespace Business.Repositories
 {
@@ -33,52 +32,51 @@ namespace Business.Repositories
             return result.Skip(page*pageSize).Take(pageSize).Select( t => mFactory.Create(t));
         }
 
-        public StoryModel GetStory(int id)
+        public StoryModel GetStory(int storyId)
         {
-            return mFactory.Create(dbContext.Stories.Find(id));
+            return mFactory.Create(dbContext.Stories.Find(storyId));
         }
 
         public StoryModel CreateStory(StoryEditModel story)
         {            
             var genres = genreRepo.FindorCreateGenres(story.Generes);
-            var segment = new Segment() { Text = story.FirstSegment.Body };
-            var model = new Story() {Title = story.Title, Byline = story.Byline, FirstSegment = segment, Genres = genres};
+            var segment = new Page() { Text = story.FirstPage.Body };
+            var model = new Story() {Title = story.Title, Summary = story.Summary, FirstPage = segment, Genres = genres};
 
-            dbContext.Segments.Add(segment);
+            dbContext.Pages.Add(segment);
             dbContext.Stories.Add(model);
             dbContext.SaveChanges();
 
             return mFactory.Create(model);
         }
 
-        public StoryModel UpdateStory(int id, StoryEditModel value)
+        public StoryModel UpdateStory(StoryEditModel storyModel)
         {
-            var story = dbContext.Stories.Find(id);
-            story.Title = value.Title;
-            story.Genres = genreRepo.FindorCreateGenres(value.Generes);
-            story.Byline = value.Byline;
-            story.FirstSegment = UpdateFirstSegment(value.FirstSegment);
+            var story = dbContext.Stories.Find(storyModel.ID);
+            story.Title = storyModel.Title;
+            story.Genres = genreRepo.FindorCreateGenres(storyModel.Generes);
+            story.Summary = storyModel.Summary;
+            story.FirstPage = UpdateFirstSegment(storyModel.FirstPage);
 
             dbContext.Entry(story).State = EntityState.Modified;
-            dbContext.Entry(story.FirstSegment).State = EntityState.Modified;
+            dbContext.Entry(story.FirstPage).State = EntityState.Modified;
             dbContext.SaveChanges();
 
             return mFactory.Create(story);
         }
 
-        private Segment UpdateFirstSegment(SegmentModel model)
+        private Page UpdateFirstSegment(PageModel model)
         {
-            var s = dbContext.Segments.Find(model.ID);
+            var s = dbContext.Pages.Find(model.ID);
             s.Text = model.Body;
             s.IsEnding = model.IsEnding;
             return s;
         }
 
-        public bool DeleteStory(int id)
+        public bool DeleteStory(int storyId)
         {
             //if dbContext.Stories it not attached?
-            var story = new Story {ID = id};
-            dbContext.Stories.Attach(story);
+            var story = dbContext.Stories.Find(storyId);
             dbContext.Stories.Remove(story);
             dbContext.SaveChanges();
             return true;
@@ -108,31 +106,6 @@ namespace Business.Repositories
             return treeModel;
         }
 
-        public void Complete()
-        {
-            dbContext.SaveChanges();            
-        }
-
-        public void Dispose()
-        {
-            if (dbContext != null)
-            {
-                Complete();
-                dbContext.Dispose();
-            }
-
-            dbContext = null;
-        }
-    }
-
-    public class RepositoryBase
-    {
-        protected AdventureTimeModel dbContext;
-
-        [Dependency]
-        public AdventureTimeModel DbContext {
-            get { return dbContext; }
-            set { dbContext = value; }
-        }
+   
     }
 }

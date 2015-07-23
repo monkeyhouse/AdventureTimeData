@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Models
 {
-    public class Segment : Metadata
+    public class Page : Metadata
     {
-        public Segment()
+        public Page()
         {
             Leaders = new HashSet<Action>();
             Actions = new HashSet<Action>();
@@ -16,6 +16,9 @@ namespace Data.Models
         [Required, MinLength(5), MaxLength(3000)]
         public string Text { get; set; }
 
+        [Index("IX_PageNumber", 1, IsUnique = true)]
+        public int PageNumber { get; set; }
+
         [Required]
         public bool IsEnding { get; set; }
 
@@ -24,5 +27,8 @@ namespace Data.Models
 
         [InverseProperty("Parent")] 
         public virtual ICollection<Action> Actions { get; set; }
+
+        //shortcut
+        public Story Story { get; set; }
     }
 }

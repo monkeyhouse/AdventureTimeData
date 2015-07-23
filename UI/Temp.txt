@@ -12,3 +12,12 @@ var manager = new UserManager<IdentityUser>(userStore);
 
 var me = manager.FindByName("sam");
 if (me == null) manager.Create(new IdentityUser() { UserName = "sam", Email = "sam.prager@gmail.com" }, "password");
+
+
+
+https://www.goodui.org/
+
+--rolback all
+Update-Database -TargetMigration:0
+
+--

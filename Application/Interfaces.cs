@@ -1,66 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Business.Models;
 using Data.Models;
 
 namespace Business
 {
-    public interface ISegmentRepo
-    {
-        SegmentModel GetSegment(int segmentId);
-        SegmentModel GetRootSegment(int storyId);
-        SegmentModel CreateSegment(int preceedingSegmentId, string action, string text);
-        SegmentModel EndStory(int segmentId);
-    }
-
-    public interface IStoryRepo
-    {
-        StoryModel CreateStory(string title, string byline, List<Genre> genres);
-        StoryModel LockStory(int storyId);
-        StoryModel GetStory(int storyId);
-    }
-
-    public interface IStoryTreeRepo
-    {
-        object GetStoryTree(int storyId);
-        object GetTreeStatistics(int storyId);        
-    }
-
-    public interface IActionRepo
-    {
-        
-        ActionModel CreateBackAction(int segmentIdFrom, int segmentIdTo, string text);
-    }
 
     public interface IStoryRepository
     {
         IQueryable<StoryModel> GetStories(int page, string titleFilter, int[] genreFilters, int pageSize = 10);
-        StoryModel GetStory(int id);
-        StoryModel CreateStory(StoryEditModel story);
-        StoryModel UpdateStory(int id, StoryEditModel value);
-        bool DeleteStory(int id);
+        StoryModel GetStory(int storyId);
+        StoryModel CreateStory(StoryEditModel storyModel);
+        StoryModel UpdateStory(StoryEditModel storyModel);
+        bool DeleteStory(int storyId);
+        //StoryModel LockStory(int storyId);
 
-        StoryStatsModel GetStoryStats(int id);
         StoryTreeModel GetStoryTree(int id);
     }
 
     public interface IGenreRepository
     {
-        //internal use
-        //Genre Create(GenreModel g);
         ICollection<Genre> FindorCreateGenres(IEnumerable<GenreModel> genres);
     }
+
+    public interface IPageRepository
+    {
+        PageModel GetPage(int segmentId);
+        PageModel GetRootPage(int storyId);
+        PageModel CreatePage(int actionId, string text);
+
+        PageModel EndStory(int segmentId);
+        PageModel UnendStory(int segmentId);
+
+        bool DeletePage(int segementId);
+    }
+
+    public interface IActionRepository
+    {
+        ActionModel GetAction(int actionId);
+        ActionModel CreateAction(int parentSegmentId, string text);
+        ActionModel UpdateAction(int parentSegmentId, string text, int? childSegmentId);
+        ActionModel SetChild(int storyId, int actionid, int childSegmentId);
+    }
+
+
+    public interface IStatsRepository
+    {
+        StoryStatsModel GetStoryStats(int id);
+        GenreStatsModel GetGenreStats(int id);
+    }
+
 
     public interface ICompletable
     {
         void Complete();
     }
 
-    public interface ISegmentRepository
+
+    /* 
+     *     public interface IPlotPointRepository
     {
-        SegmentModel CreateSegment(int storyId, int parentSegmentId, SegmentModel model);
+        PageModel CreatePage(int storyId, int parentSegmentId, PageModel model);
+
+        PlotPointModel CreatePlotPoint( PlotPointAddModel model );
+        PlotPointModel UpdatePlotPoint( PlotPointModel model);
+        //ActionModel CreateBackAction(int pageIdFrom, int segmentIdTo, string text);
     }
 
+
+     */
 }

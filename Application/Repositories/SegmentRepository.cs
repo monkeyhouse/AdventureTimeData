@@ -1,46 +1,46 @@
 ﻿using System;
-using System.Linq;
-using Data;
-using Data.Models;
-using Action = Data.Models.Action;
+using Business.Models;
 
 namespace Business.Repositories
 {
-    public class SegmentRepository : RepositoryBase,  ISegmentRepository, IDisposable, ICompletable
+    public class PageRepository : RepositoryBase, IPageRepository 
     {
-
-        //private ModelFactory mFactory;
-        public SegmentRepository(IModelFactory modelFactory)
+        IActionRepository genreRepo;
+        private IModelFactory mFactory;
+        public PageRepository(IActionRepository genreRepository,  IModelFactory modelFactory)
         {
-            //mFactory = modelFactory;
+            genreRepo = genreRepository;
+            mFactory = modelFactory;
         }
 
-        public SegmentModel CreateSegment(int storyId, int parentSegmentId, SegmentModel model)
+        public PageModel GetPage(int segmentId)
         {
-            var parent = dbContext.Segments.Find(parentSegmentId);
-            //var segment = new Segment(){ Text = model.Body, IsEnding = model.IsEnding };
-            
-            //var actions = model.Leaders.Select(t => new Action()
-            //    { Text = t.Text, Parent = parent, Child = segment}).ToList();
-            //segment.Leaders = actions;
-            //dbContext.Actions.AddRange(actions);
-            //dbContext.Segments.Add(segment);
-            // // is this required?
-            //action.ChildId = segment.ID;
-            //return mFactory.Create(segment);
-            return null;            
+            throw new System.NotImplementedException();
         }
 
-        public void Dispose()
+        public PageModel GetRootPage(int storyId)
         {
-           if (dbContext != null)
-               dbContext.Dispose();
+            throw new System.NotImplementedException();
         }
 
-        public void Complete()
+        public PageModel CreatePage(int actionId, string text)
         {
-            if (dbContext != null)
-                dbContext.SaveChanges();
+            throw new System.NotImplementedException();
+        }
+
+        public PageModel EndStory(int segmentId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public PageModel UnendStory(int segmentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePage(int segementId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

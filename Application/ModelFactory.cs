@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Business.Models;
 using Data.Models;
 
 namespace Business
@@ -15,8 +16,6 @@ namespace Business
                  };
         }
 
-        //public ActionModel CreateActionWithSegments(Action action, Segment parent, Segment child);
-
         public GenreModel Create(Genre genre)
         {
             return new GenreModel()
@@ -25,16 +24,24 @@ namespace Business
                        Text = genre.Text
                    };
         }
-        public SegmentModel Create(Segment segment)
+        public PageModel Create(Page page)
         {
-            return new SegmentModel()
+            return new PageModel()
                    {
-                       ID = segment.ID,
-                       Leaders = segment.Leaders.Select( Create),
-                       Body = segment.Text,
-                       Actions = segment.Actions.Select(Create),
-                       IsEnding = segment.IsEnding
+                       ID = page.ID,
+                       Body = page.Text,
+                       IsEnding = page.IsEnding
                    };
+        }
+
+        public PlotPointModel CreatePlotPoint(Page page)
+        {
+            return new PlotPointModel()
+                   {
+                       Page = Create(page),
+                       Leaders = page.Leaders.Select(Create),
+                       Actions = page.Actions.Select(Create)
+                   };                   
         }
 
         public StoryModel Create(Story story)
@@ -43,8 +50,8 @@ namespace Business
                    {
                        ID = story.ID,
                        Title = story.Title,
-                       Byline = story.Byline,
-                       FirstSegment = Create(story.FirstSegment),
+                       Summary = story.Summary,
+                       FirstPage = Create(story.FirstPage),
                        Generes = story.Genres.Select(Create)
                    };
         }

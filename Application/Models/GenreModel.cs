@@ -6,6 +6,7 @@ namespace Business
     {
         public int ID { get; set; }
         public string Text { get; set; }
+        public bool IsApproved { get; set; }
 
         public override string ToString()
         {

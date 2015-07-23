@@ -12,13 +12,14 @@ namespace Data.Models
         [Required, MinLength(4), MaxLength(500)]
         public string Text { get; set; }
 
-        public int? ParentId { get; set; }
-        [ForeignKey("ParentId"), Required]
-        public virtual Segment Parent { get; set; }
+        public int? ParentID { get; set; }
+        [ForeignKey("ParentID"), Required]
+        public virtual Page Parent { get; set; }
 
-        public int? ChildId { get; set; }
-        [ForeignKey("ChildId")]
-        public virtual Segment Child { get; set; }
-        
+        public int? ChildID { get; set; }
+        [ForeignKey("ChildID")]
+        public virtual Page Child { get; set; }
+
+        public virtual Story Story { get; set; }
     }
 }

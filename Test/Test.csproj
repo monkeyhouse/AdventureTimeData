@@ -99,6 +99,8 @@
     <Compile Include="DataFactory.cs" />
     <Compile Include="DependencyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="WhenCreateOrUpdateAPlotPoint.cs" />
     <Compile Include="WhenCreateOrUpdateStory.cs" />
     <Compile Include="WhenCreateOrUpdateStoryGenres.cs" />
   </ItemGroup>

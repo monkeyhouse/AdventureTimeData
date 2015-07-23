@@ -10,7 +10,7 @@ namespace Data
         [Required]
         public DateTime CreatedOn { get; set; }
 
-        [Column("CreatedById")]
+        [Column("CreatedByID")]
         public string CreatedBy{ get; set; }
         [ForeignKey("CreatedBy")]
         public IdentityUser CreatedByUser { get; set; }   
@@ -18,7 +18,7 @@ namespace Data
         [Required]
         public DateTime ModifiedOn { get; set; }
 
-        [Column("ModifiedById")]
+        [Column("ModifiedByID")]
         public string ModifiedBy { get; set; }
         [ForeignKey("ModifiedBy")]
         public IdentityUser ModifiedByUser { get; set; }   

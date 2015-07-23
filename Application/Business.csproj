@@ -83,6 +83,7 @@
     <Compile Include="Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenereRepository.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\SegmentRepository.cs" />
     <Compile Include="Repositories\StoryRepository.cs" />
   </ItemGroup>

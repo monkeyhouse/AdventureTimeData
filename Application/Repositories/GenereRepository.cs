@@ -6,7 +6,7 @@ using Data.Models;
 
 namespace Business.Repositories
 {
-    public class GenreRepository : RepositoryBase, IGenreRepository, ICompletable, IDisposable
+    public class GenreRepository : RepositoryBase, IGenreRepository
     {
        
         public Genre Create(GenreModel g)
@@ -50,15 +50,6 @@ namespace Business.Repositories
             return resultGenres;
         }
 
-        public void Complete()
-        {
-            dbContext.SaveChanges();
-        }
 
-        public void Dispose()
-        {
-            if(dbContext != null)
-                dbContext.Dispose();
-        }
     }
 }

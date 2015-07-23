@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using Business.Models;
 using Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -23,34 +24,10 @@ namespace Test
 
         [TestInitialize]
         public void TestInit()
-        {          
-            var db = new AdventureTimeModel();
-            var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
-            db.userID = userManager.FindByName("sam");
-
-            var container = new Container(_ =>
-            {
-
-
-                _.Policies.FillAllPropertiesOfType<AdventureTimeModel>().Use(db);
-
-                _.Scan(x =>
-                {
-                    x.TheCallingAssembly();
-                    x.Assembly("Business");
-                    x.WithDefaultConventions();
-                    x.SingleImplementationsOfInterface();
-
-                });
-
-               
-            });
-
+        {
+            dbContext = Common.GetContext();
+            var container = Common.InitDependencyInjection(dbContext);
             repo = container.GetInstance<IStoryRepository>();
-
-            //each test
-            dbContext = db;
-
         }
 
         private StoryEditModel ScaffoldStory()
@@ -61,14 +38,14 @@ namespace Test
                 new GenreModel { Text = "Comedy" }
             };
 
-            var firstSegment = new SegmentModel { Body = "Segment Text" };
+            var firstPage = new PageModel { Body = "Segment Text" };
 
             var story = new StoryEditModel()
             {
                 Title = "Test Title",
-                Byline = "Test Byline",
+                Summary = "Test Byline",
                 Generes = genres,
-                FirstSegment = firstSegment
+                FirstPage = firstPage
             };
             return story;
         }
@@ -76,12 +53,15 @@ namespace Test
         [TestMethod]
         public void AbleToCreateStory()
         {
+            //Arrange
             var story = ScaffoldStory();
 
+            //Act
             var result = repo.CreateStory(story);
 
+            //Assert
             Assert.AreNotEqual(0, result.ID);
-            Assert.AreNotEqual(0, result.FirstSegment.ID);
+            Assert.AreNotEqual(0, result.FirstPage.ID);
             Assert.AreEqual(story.Title, result.Title);            
         }
 
@@ -94,11 +74,11 @@ namespace Test
 
             //Act
             story.Title = "Updated Title";
-            story.FirstSegment.ID = creation.FirstSegment.ID;
-            story.FirstSegment.Body = "Updated Body";
+            story.FirstPage.ID = creation.FirstPage.ID;
+            story.FirstPage.Body = "Updated Body";
             story.ID = creation.ID;
 
-            var result = repo.UpdateStory(creation.ID, story);
+            var result = repo.UpdateStory(story);
 
             //Assert
             var verification = repo.GetStory(result.ID);
@@ -106,7 +86,7 @@ namespace Test
             Assert.AreEqual(verification.ID, story.ID);
 
             Assert.AreEqual(story.Title, result.Title);
-            Assert.AreEqual(story.FirstSegment.Body, result.FirstSegment.Body);
+            Assert.AreEqual(story.FirstPage.Body, result.FirstPage.Body);
            
             Assert.AreEqual(String.Join("",story.Generes.Select(t => t.Text)),
                             String.Join("",result.Generes.Select(t => t.Text)));
@@ -115,13 +95,17 @@ namespace Test
         [TestMethod]
         public void AbleToDeleteStory()
         {
+            //Arrange
             var storyEditModel = ScaffoldStory();
             var storyModel = repo.CreateStory(storyEditModel);
             var createdId = storyModel.ID;
 
+            //Act
             var delResult = repo.DeleteStory(createdId);
 
+            //Assert
             var count = dbContext.Stories.Count(t => t.ID == createdId);
+            Assert.AreEqual(true, delResult);
             Assert.AreEqual(0, count);
         }
 

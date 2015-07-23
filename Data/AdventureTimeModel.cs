@@ -1,3 +1,4 @@
+using System.Data.Entity.ModelConfiguration.Conventions;
 using Data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -27,16 +28,19 @@ namespace Data
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         public virtual DbSet<Story> Stories { get; set; }
-        public virtual DbSet<Segment> Segments { get; set; }
+        public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Action> Actions { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Conventions.Add(new ForeignKeyNamingConvention());
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
             modelBuilder.Entity<Story>()
-                .HasMany(t => t.Genres)
+                .HasMany(t => t.Genres)                
                 .WithMany();
-                
 
             base.OnModelCreating(modelBuilder);
         }

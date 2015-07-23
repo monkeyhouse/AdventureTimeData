@@ -8,6 +8,7 @@ namespace Data.Models
 
         [Required, MinLength(4), MaxLength(50)]
         public string Text { get; set; }
-        
+
+        public bool IsApproved { get; set; }        
     }
 }
