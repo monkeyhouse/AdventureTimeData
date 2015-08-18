@@ -1,11 +1,10 @@
-﻿using Business.Models;
-using Data.Models;
+﻿using UI.Models;
 
-namespace Business
+namespace UI.Queries.Models
 {
     public interface IModelFactory
     {
-        GenreModel Create(Genre genre);
+        TagModel Create(Tag tag);
         PageModel Create(Page page);
         StoryModel Create(Story story);
     }

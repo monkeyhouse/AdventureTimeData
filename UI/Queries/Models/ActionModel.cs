@@ -1,6 +1,4 @@
-﻿using Business.Models;
-
-namespace Business
+﻿namespace UI.Queries.Models
 {
 
     public class ActionModel

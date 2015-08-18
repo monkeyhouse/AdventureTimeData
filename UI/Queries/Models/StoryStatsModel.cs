@@ -1,4 +1,4 @@
-﻿namespace Business.Models
+﻿namespace UI.Queries.Models
 {
     public class StoryStatsModel
     {

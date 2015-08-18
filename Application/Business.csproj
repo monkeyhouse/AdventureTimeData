@@ -71,21 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IModelFactory.cs" />
-    <Compile Include="Models\ActionModel.cs" />
-    <Compile Include="ModelFactory.cs" />
-    <Compile Include="Models\StoryStatsModel.cs" />
-    <Compile Include="Models\SegmentModel.cs" />
-    <Compile Include="Models\StoryModel.cs" />
-    <Compile Include="Models\StoryTreeModel.cs" />
-    <Compile Include="Models\StoryTreeNode.cs" />
-    <Compile Include="Models\GenreModel.cs" />
-    <Compile Include="Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\GenereRepository.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\SegmentRepository.cs" />
-    <Compile Include="Repositories\StoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">

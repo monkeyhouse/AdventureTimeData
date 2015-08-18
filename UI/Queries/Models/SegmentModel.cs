@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Business.Models
+namespace UI.Queries.Models
 {
     public class PageModel
     {

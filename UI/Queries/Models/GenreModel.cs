@@ -1,8 +1,6 @@
-﻿using Data.Models;
-
-namespace Business
+﻿namespace UI.Queries.Models
 {
-    public class GenreModel
+    public class TagModel
     {
         public int ID { get; set; }
         public string Text { get; set; }

@@ -97,22 +97,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataFactory.cs" />
-    <Compile Include="DependencyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="WhenCreateOrUpdateAPlotPoint.cs" />
     <Compile Include="WhenCreateOrUpdateStory.cs" />
     <Compile Include="WhenCreateOrUpdateStoryGenres.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Application\Business.csproj">
-      <Project>{df3173e4-2538-46bd-bfb8-aa0eec73f747}</Project>
-      <Name>Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{abf7aa2b-1d87-4900-8bbb-226c337378b9}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -44,11 +44,11 @@ namespace Business
     }
 
 
-    public interface IStatsRepository
-    {
-        StoryStatsModel GetStoryStats(int id);
-        GenreStatsModel GetGenreStats(int id);
-    }
+    //public interface IStatsRepository
+    //{
+    //    StoryStatsModel GetStoryStats(int id);
+    //    GenreStatsModel GetGenreStats(int id);
+    //}
 
 
     public interface ICompletable

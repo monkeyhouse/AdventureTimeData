@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Business.Models;
-using Data.Models;
+﻿using System.Linq;
+using UI.Models;
 
-namespace Business
+namespace UI.Queries.Models
 {
     public class ModelFactory : IModelFactory
     {
@@ -16,9 +14,9 @@ namespace Business
                  };
         }
 
-        public GenreModel Create(Genre genre)
+        public TagModel Create(Tag genre)
         {
-            return new GenreModel()
+            return new TagModel()
                    {
                        ID = genre.ID,
                        Text = genre.Text
@@ -52,7 +50,7 @@ namespace Business
                        Title = story.Title,
                        Summary = story.Summary,
                        FirstPage = Create(story.FirstPage),
-                       Generes = story.Genres.Select(Create)
+                       Tags = story.Tags.Select(Create)
                    };
         }
     }

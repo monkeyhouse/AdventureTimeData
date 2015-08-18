@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using Business.Models;
-using Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business;
 using System.Collections.Generic;
-using Business.Repositories;
 using StructureMap;
 using StructureMap.Graph;
 

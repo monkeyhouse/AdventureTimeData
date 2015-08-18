@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Business;
-using Business.Models;
-using Business.Repositories;
-using Consoles;
-using Data;
+//using Business;
+//using Business.Models;
+//using Business.Repositories;
+//using Consoles;
+//using Data;
+using ATConsole.Seed;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -25,20 +26,23 @@ namespace ATConsole
             var me = manager.FindByName("sam");
             if (me == null) manager.Create(new IdentityUser() { UserName = "sam", Email = "sam.prager@gmail.com" }, "password");
 
-            var db = new AdventureTimeModel();
+
+            //var db = new AdventureTimeModel();
 
 
-            Console.WriteLine("Press <enter> to clear tables");
-            Console.ReadLine();
+            //Console.WriteLine("Press <enter> to clear tables");
+            //Console.ReadLine();
 
-            Console.WriteLine("Clearing Database...");
+            //Console.WriteLine("Clearing Database...");
 
-            db.Database.ExecuteSqlCommand("Delete from StoryGenres where 1=1");
-            db.Database.ExecuteSqlCommand("DELETE from Genres where 1=1");
-            db.Database.ExecuteSqlCommand("DELETE from Stories where 1=1");
-            db.Database.ExecuteSqlCommand("DELETE from Pages where 1=1");
-            db.SaveChanges();
+            //db.Database.ExecuteSqlCommand("Delete from StoryGenres where 1=1");
+            //db.Database.ExecuteSqlCommand("DELETE from Genres where 1=1");
+            //db.Database.ExecuteSqlCommand("DELETE from Stories where 1=1");
+            //db.Database.ExecuteSqlCommand("DELETE from Pages where 1=1");
+            //db.SaveChanges();
 
+            Console.WriteLine("Seeding Tags");
+            //var z = new ElRunner(me);
 
             Console.WriteLine("Press <enter> to exit");
             Console.ReadLine();
@@ -61,36 +65,36 @@ namespace ATConsole
 
     public class DataFactory
     {
-        StoryRepository _sFactory;
-        private string _username;
-        public DataFactory(string username)
-        {
-            _username = username;
-           // _sFactory = new StoryRepository(username);
+        //StoryRepository _sFactory;
+        //private string _username;
+        //public DataFactory(string username)
+        //{
+        //    _username = username;
+        //   // _sFactory = new StoryRepository(username);
 
-        }
+        //}
 
-        public static string[] Generes = {"Fariy Tails","Childrens Stories", "Horror", "Science Fiction", "Folk Ficition", "Superheroes", "Nightime"};
+        //public static string[] Generes = {"Fariy Tails","Childrens Stories", "Horror", "Science Fiction", "Folk Ficition", "Superheroes", "Nightime"};
 
-        public StoryModel CreateStory()
-        {
-            var genres = Generes.GetRandomValues(4).Select( t=> new GenreModel(){ID = t.Index, Text =  t.Item});
+        //public StoryModel CreateStory()
+        //{
+        //    var genres = Generes.GetRandomValues(4).Select( t=> new GenreModel(){ID = t.Index, Text =  t.Item});
 
-            var firstPage = new PageModel()
-                               {
-                                   Body = "Once there was an only lady who lived in a shoe. She sneezed loudly and said ..... Then she took the dear old rabbit inside, she boiled the water and ..... the hide.",
-                                   IsEnding = true
-                               };
-            var story = new StoryEditModel()
-                        {
-                            Title = "My Test Story",
-                            Summary = "Once there was a rabbit",
-                            FirstPage = firstPage,
-                            Generes = genres
-                        };
+        //    var firstPage = new PageModel()
+        //                       {
+        //                           Body = "Once there was an only lady who lived in a shoe. She sneezed loudly and said ..... Then she took the dear old rabbit inside, she boiled the water and ..... the hide.",
+        //                           IsEnding = true
+        //                       };
+        //    var story = new StoryEditModel()
+        //                {
+        //                    Title = "My Test Story",
+        //                    Summary = "Once there was a rabbit",
+        //                    FirstPage = firstPage,
+        //                    Generes = genres
+        //                };
 
-           var result = _sFactory.CreateStory(story);
-           return result;
-        }
+        //   var result = _sFactory.CreateStory(story);
+        //   return result;
+        //}
     }
 }
