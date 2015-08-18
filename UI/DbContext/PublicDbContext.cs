@@ -3,7 +3,7 @@ using UI.Models;
 
 namespace UI.DbContext
 {
-    public class PublicDbContext :AdventureTimeModel
+    public class PublicDbContext :AdventureTimeDbContext
     {
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

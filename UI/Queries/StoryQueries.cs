@@ -8,10 +8,10 @@ namespace UI.Queries
 {
     public class QueryBase :  IDisposable
     {
-         protected AdventureTimeModel dbContext;
+         protected AdventureTimeDbContext dbContext;
 
         //[Dependency]
-        public AdventureTimeModel DbContext {
+        public AdventureTimeDbContext DbContext {
             get { return dbContext; }
             set { dbContext = value; }
         }

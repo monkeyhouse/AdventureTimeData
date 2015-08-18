@@ -18,13 +18,14 @@ namespace ATConsole.Seed
 
         public ElRunner(IdentityUser userID)
         {
-            var dbContext = new AdventureTimeModel();
+            var dbContext = new AdventureTimeDbContext();
             dbContext.userID = userID;
 
             using (var dbContextTransaction = dbContext.Database.BeginTransaction())
             {
                 try
                 {
+                    Console.WriteLine("Seeding Tags...");
 
                     //create tags 
                     var tags = new XmlParser("Tags.xml")
@@ -39,9 +40,11 @@ namespace ATConsole.Seed
                     dbContext.SaveChanges();
 
                     //save tags
-                    var savedTags = dbContext.Tags.Select(t => t).ToList();
+                    var savedTags = dbContext.Tags.ToList();
                     var savedTagCount = savedTags.Count();
 
+
+                    Console.WriteLine("Seeding Stories...");
                     //create stories
                     var stories = new XmlParser("Stories.xml")
                         .ParseElements(t => new Story()
@@ -74,6 +77,7 @@ namespace ATConsole.Seed
 
                     // create pages
                     //depends on stories
+                    Console.WriteLine("Seeding Pages...");
                     var pages = new XmlParser("Pages.xml")
                         .ParseElements(t => new Page()
                             {
@@ -108,6 +112,7 @@ namespace ATConsole.Seed
 
 
                     //create actions in each story
+                    Console.WriteLine("Seeding Actions...");
                     var actions = new XmlParser("Actions.xml")
                         .ParseElements(t => new Action()
                                             {

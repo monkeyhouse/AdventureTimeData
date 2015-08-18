@@ -10,7 +10,7 @@ using Action = UI.Models.Action;
 namespace UI.DbContext
 {
 
-    public class AdventureTimeModel : IdentityDbContext 
+    public class AdventureTimeDbContext : IdentityDbContext 
     {
        // Your context has been configured to use a 'AdventureTimeModel' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
@@ -18,7 +18,7 @@ namespace UI.DbContext
         // 
         // If you wish to target a different database and/or database provider, modify the 'AdventureTimeModel' 
         // connection string in the application configuration file.
-        public AdventureTimeModel(): base("name=DefaultConnection")
+        public AdventureTimeDbContext(): base("name=DefaultConnection")
         {
             Configuration.LazyLoadingEnabled = false;
         }

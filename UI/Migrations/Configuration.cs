@@ -1,6 +1,3 @@
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-
 namespace UI.Migrations
 {
     using System;
@@ -8,14 +5,14 @@ namespace UI.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<UI.DbContext.AdventureTimeModel>
+    internal sealed class Configuration : DbMigrationsConfiguration<UI.DbContext.AdventureTimeDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(UI.DbContext.AdventureTimeModel context)
+        protected override void Seed(UI.DbContext.AdventureTimeDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -29,14 +26,6 @@ namespace UI.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-            var userStore = new UserStore<IdentityUser>();
-            var manager = new UserManager<IdentityUser>(userStore);
-
-
-            var me = manager.FindByName("sam");
-            if (me == null) manager.Create(new IdentityUser() { UserName = "sam", Email = "sam.prager@gmail.com" }, "password");
-
         }
     }
 }

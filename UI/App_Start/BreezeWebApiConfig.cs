@@ -17,6 +17,8 @@ namespace UI.App_Start {
           name: "BreezeApi",
           routeTemplate: "breeze/{controller}/{action}"
       );
+
+        GlobalConfiguration.Configuration.EnableCors();
     }
   }
 }

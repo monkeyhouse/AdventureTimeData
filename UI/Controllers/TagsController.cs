@@ -7,14 +7,16 @@ using Newtonsoft.Json.Linq;
 using UI.DbContext;
 using UI.Models;
 using UI.Queries.Models;
+using System.Web.Http.Cors;
 
 namespace UI.Controllers
 {
     [BreezeController]
+    [EnableCors("*", "*", "*")]
     public class TagsController : ApiController
     {
-        readonly EFContextProvider<AdventureTimeModel> _contextProvider =
-            new EFContextProvider<AdventureTimeModel>();
+        readonly EFContextProvider<AdventureTimeDbContext> _contextProvider =
+            new EFContextProvider<AdventureTimeDbContext>();
 
         // ~/breeze/tags/Metadata 
         [HttpGet]
