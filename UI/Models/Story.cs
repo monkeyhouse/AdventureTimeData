@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UI.Models.Stats;
 
 namespace UI.Models
 {
@@ -28,6 +29,9 @@ namespace UI.Models
         public virtual ICollection<Page>  Pages { get; set; }
         [InverseProperty("Story")]
         public virtual ICollection<Action> Actions { get; set; }
+
+        [InverseProperty("Story")]
+        public virtual StoryStats StoryStats { get; set; }
         
     }
 

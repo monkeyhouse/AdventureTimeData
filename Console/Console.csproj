@@ -81,6 +81,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExecuteDataSeeding.cs" />
     <Compile Include="Seed\ElRunner.cs" />
+    <Compile Include="Seed\Pocos\UserDTO.cs" />
     <Compile Include="Seed\ReadXmlFile.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,16 +89,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Seed\Pages.xml">
+    <Content Include="Seed\Data\Users.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Seed\Actions.xml">
+    <Content Include="Seed\Data\Pages.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Seed\Stories.xml">
+    <Content Include="Seed\Data\Actions.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Seed\Tags.xml">
+    <Content Include="Seed\Data\Stories.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Seed\Data\Tags.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -107,6 +111,7 @@
       <Name>UI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

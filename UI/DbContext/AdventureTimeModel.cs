@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
 using UI.Models;
 using Action = UI.Models.Action;
+using UI.Models.Stats;
 
 namespace UI.DbContext
 {
@@ -23,14 +24,22 @@ namespace UI.DbContext
             Configuration.LazyLoadingEnabled = false;
         }
 
-        public IdentityUser userID;        
+        public IdentityUser userID;
+
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
+        //Core Tables
         public virtual DbSet<Story> Stories { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<Action> Actions { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+
+        //Stats Tables
+        public virtual DbSet<StoryStats> StoryStats { get; set; }
+        public virtual DbSet<UserStoryStats> UserStoryStats { get; set; }
+        public virtual DbSet<UserStoryEnding> UserStoryEndings { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -45,6 +54,7 @@ namespace UI.DbContext
             base.OnModelCreating(modelBuilder);
         }
 
+        public bool AutoSeedMetadata { get; set; } = true;
         public override int SaveChanges()
         {
             // fix trackable entities
@@ -53,7 +63,7 @@ namespace UI.DbContext
             //if (userID == null)
             //    throw new NullReferenceException("DbContext Error: UserID must be injected or set prior to saving changes.");
 
-            if (trackables != null)
+            if (trackables != null & AutoSeedMetadata)
             {
                 // added
                 foreach (var item in trackables.Where(t => t.State == EntityState.Added))

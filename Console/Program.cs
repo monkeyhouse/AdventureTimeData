@@ -8,6 +8,7 @@ using System.Linq;
 using ATConsole.Seed;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using UI.DbContext;
 
 namespace ATConsole
 {
@@ -16,33 +17,10 @@ namespace ATConsole
         static void Main(string[] args)
         {
             Console.WriteLine("---------- DATA SEEDING ROUTINE -----------");
-            Console.WriteLine("This console program was created to clear and seed database tables.");
+            Console.WriteLine("This console program clears and seeds most database tables.");
             Console.WriteLine("Press <enter> to continue");
-
-            //Console.WriteLine("Press <enter> to clear tables");
             //Console.ReadLine();
-
-            //Console.WriteLine("Clearing Database...");
-
-            //clear database
-            //db.Database.ExecuteSqlCommand("DELETE from StoryTags where 1=1");
-            //db.Database.ExecuteSqlCommand("DELETE from Tags where 1=1");
-            //db.Database.ExecuteSqlCommand("DELETE from Stories where 1=1");
-            //db.Database.ExecuteSqlCommand("DELETE from Pages where 1=1");
-            //db.SaveChanges();
-
-            //create user
-            Console.WriteLine("Seeding Users...");
-            string username = "sam";
-
-            var userStore = new UserStore<IdentityUser>();
-            var manager = new UserManager<IdentityUser>(userStore);
-
-            var me = manager.FindByName("sam");
-            if (me == null) manager.Create(new IdentityUser() { UserName = "sam", Email = "sam.prager@gmail.com" }, "password");
-
-            //var db = new AdventureTimeModel();
-            new ElRunner(me);
+            new ElRunner().Exceute();
 
             Console.WriteLine("Press <enter> to exit");
             Console.ReadLine();

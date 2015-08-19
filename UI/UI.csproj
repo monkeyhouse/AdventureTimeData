@@ -58,6 +58,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.EF6, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -179,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BreezeWebApiConfig.cs" />
+    <Compile Include="Controllers\StoryStatsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\_ApiController.cs" />
     <Compile Include="DbContext\PublicDbContext.cs" />
@@ -197,12 +210,25 @@
     <Compile Include="Migrations\201508181326324_init.Designer.cs">
       <DependentUpon>201508181326324_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508190502181_stat_tables.cs" />
+    <Compile Include="Migrations\201508190502181_stat_tables.Designer.cs">
+      <DependentUpon>201508190502181_stat_tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508191630176_stat_table_corrections.cs" />
+    <Compile Include="Migrations\201508191630176_stat_table_corrections.Designer.cs">
+      <DependentUpon>201508191630176_stat_table_corrections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508192246468_stats_to_story.cs" />
+    <Compile Include="Migrations\201508192246468_stats_to_story.Designer.cs">
+      <DependentUpon>201508192246468_stats_to_story.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\Page.cs" />
-    <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\Stats\UserStoryStats.cs" />
+    <Compile Include="Models\Stats\StoryStats.cs" />
     <Compile Include="Models\Story.cs" />
     <Compile Include="DbContext\RemoveUnderscoreForeignKeyNamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -248,6 +274,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201508181326324_init.resx">
       <DependentUpon>201508181326324_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508190502181_stat_tables.resx">
+      <DependentUpon>201508190502181_stat_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508191630176_stat_table_corrections.resx">
+      <DependentUpon>201508191630176_stat_table_corrections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508192246468_stats_to_story.resx">
+      <DependentUpon>201508192246468_stats_to_story.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

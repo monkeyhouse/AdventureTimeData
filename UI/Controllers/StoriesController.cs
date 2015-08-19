@@ -5,6 +5,7 @@ using UI.DbContext;
 using UI.Models;
 using System.Linq;
 using System.Web.Http.Cors;
+using UI.Models.Stats;
 
 namespace UI.Controllers
 {
@@ -27,7 +28,20 @@ namespace UI.Controllers
         [HttpGet]
         public IQueryable<Story> Stories()
         {
-            return _contextProvider.Context.Stories;
+            return _contextProvider.Context.Stories.Include("Tags").Include("StoryStats");
         }
+
+        [HttpGet]
+        public IQueryable<StoryStats> StoryStats()
+        {
+            return _contextProvider.Context.StoryStats;
+        }
+
+        [HttpGet]
+        public IQueryable<object> Tags()
+        {
+            return _contextProvider.Context.Stories.Include("Tags");
+        }
+
     }
 }

@@ -17,7 +17,7 @@ namespace ATConsole.Seed
         public XmlParser(string file)
         {
             var d = Directory.GetCurrentDirectory();
-            path = Path.Combine(d, "Seed\\" + file);
+            path = Path.Combine(d, "Seed\\Data\\" + file);
         }
         public IEnumerable<T> ParseElements<T>(Func<XElement,T> fxn) where T:new()
         {
